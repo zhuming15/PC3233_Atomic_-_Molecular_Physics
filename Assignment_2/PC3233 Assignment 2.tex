@@ -1,0 +1,236 @@
+\documentclass{article}
+
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[breakable]{tcolorbox}
+\usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+\usepackage{graphicx} % Required for inserting images
+\usepackage{physics}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsmath}
+
+\title{PC3233 Assignment 2}
+\author{Hor Zhu Ming (A0236535A)}
+\date{Feb 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{The Radial Equation}
+Consider the following potential and differentiation:
+\begin{equation}
+  \dv[2]{u}{r} + 2(\frac{1}{r} - \kappa) \dv{u}{r} + \left( \frac{2a-2\kappa}{r} - \frac{l(l+1)}{r^2}\right) u = 0
+\end{equation}
+
+Ansatz: Assume the general solution of $u(r) = \sum_{j} b_j r^{j}$
+Then, we have
+\begin{equation}
+  \begin{cases}
+    \displaystyle
+    u(r) = \sum_{j = 0} b_j r^{j} \\
+    \displaystyle
+    \dv{u}{r} = \sum_{j = 0} b_j j r^{j-1} \\
+    \displaystyle
+    \dv[2]{u}{r} = \sum_{j = 0} b_j j (j-1) r^{j-2} \\
+  \end{cases}
+\end{equation}
+
+Since any $r^{j}$ term with $j < 0$ is zero, we can rewrite the differentiation as
+
+\begin{equation}
+  \begin{cases}
+    \displaystyle
+    u(r) = \sum_{j = 0} b_j r^{j} \\
+    \displaystyle
+    \dv{u}{r} = \sum_{j = 1} b_j j r^{j-1} = \sum_{j = 0} b_{j+1} (j+1) r^{j} \\
+    \displaystyle
+    \dv[2]{u}{r} = \sum_{j = 2} b_j j (j-1) r^{j-2} = \sum_{j = 0} b_{j+2} (j+2) (j+1) r^{j} \\
+  \end{cases}
+\end{equation}
+
+Substituting the result $(3)$ into the original equation $(1)$, we have
+
+\begin{equation*}
+    \sum_{j = 0} b_{j+2} (j+2) (j+1) r^{j} + 2(\frac{1}{r} - \kappa) \sum_{j = 0} b_{j+1} (j+1) r^{j} + \left( \frac{2a-2\kappa}{r} - \frac{l(l+1)}{r^2}\right) \sum_{j = 0} b_j r^{j} = 0
+\end{equation*}
+
+Then expanding the summation, we have
+
+\begin{equation*}
+  \sum_{j = 0} b_{j+2} (j+2) (j+1) r^{j} + 2\sum_{j = 0} b_{j+1} (j+1) r^{j-1} - 2\kappa\sum_{j = 0} b_{j+1} (j+1) r^{j} + (2a-2\kappa) \sum_{j = 0} b_j r^{j-1} - l(l+1)\sum_{j = 0} b_j r^{j-2}  = 0 \\
+\end{equation*}
+
+Similarly, we can shift the index of the summation to get for any $r^{j}$ with $j < 0$, we have
+
+\begin{equation*}
+  \sum_{j = 0} b_{j+2} (j+2) (j+1) r^{j} + 2\sum_{j = 1} b_{j+1} (j+1) r^{j-1} - 2\kappa\sum_{j = 0} b_{j+1} (j+1) r^{j} + (2a-2\kappa) \sum_{j = 1} b_j r^{j-1} - l(l+1)\sum_{j = 2} b_j r^{j-2}  = 0 \\
+\end{equation*}
+
+Then, we can rewrite the summation as
+
+\begin{equation*}
+  \sum_{j = 0} b_{j+2} (j+2) (j+1) r^{j} + 2\sum_{j = 0} b_{j+2} (j+2) r^{j} - 2\kappa\sum_{j = 0} b_{j+1} (j+1) r^{j}+ (2a-2\kappa) \sum_{j = 0} b_{j+1} r^{j} - l(l+1)\sum_{j = 0} b_{j+2} r^{j}  = 0 \\
+\end{equation*}
+
+Then, we can combine the summation and factor out the $r^{j}$ term to get
+
+\begin{equation}
+  \sum_{j = 0} \left[ b_{j+2} (j+2) (j+1) + 2b_{j+2} (j+2) - 2\kappa b_{j+1} (j+1) + (2a-2\kappa) b_{j+1} - l(l+1) b_{j+2} \right] r^{j}  = 0 \\  
+\end{equation}
+
+In order for the equation to hold for all $r^{j}$, we must have
+
+\begin{equation}
+  b_{j+2} (j+2) (j+1) + 2b_{j+2} (j+2) - 2\kappa b_{j+1} (j+1) + (2a-2\kappa) b_{j+1} - l(l+1) b_{j+2} = 0
+\end{equation}  
+
+For all $j$. Then, we can rewrite the equation as
+
+\begin{equation}
+  b_{j+2} \left[ (j+2) (j+1) + 2(j+2) - l(l+1) \right] = - 2\kappa b_{j+1} (j+1) + (2a-2\kappa) b_{j+1}
+\end{equation}
+
+Then, we can factor out the $b_{j+2}$ and $b_{j+1}$ term to get
+
+\begin{equation}
+  b_{j+2} \left[ (j+2) (j+1) + 2(j+2) - l(l+1) \right] = b_{j+1} [(2a-2\kappa) - 2\kappa (j+1)]
+\end{equation}
+
+Then, we can simplify the equation to get
+
+\begin{align}
+  b_{j+2} &= 2 b_{j+1} \frac{(a-\kappa) - \kappa (j+1)}{(j+2) (j+1) + 2(j+2) - l(l+1)} \\
+  &= 2 b_{j+1} \frac{k(j+2) - a}{(j+2) (j+3) - l(l+1)} \\
+\end{align}
+
+Then, rewrite the index $j+2$ as $j$ to get
+
+\begin{equation}
+  b_{j} = 2 b_{j-1} \frac{\kappa j - a}{(j) (j+1) - l(l+1)}
+\end{equation}
+
+In order for the series to not diverge, Then
+
+\begin{equation}
+  j \geq l + 1 \implies n \geq l + 1
+\end{equation}
+
+
+
+\section{The Hydrogen Atom and Spin}
+\subsection{Part A}
+"eV" stands for electron-volt, which is a unit of energy. It is defined as the energy gain for an single electron
+ when it is accelerated through an electric potential difference of $1$ volt.
+
+\begin{equation}
+  \text{Work done (In Joule), } W = qV \text{ (In eV)} 
+\end{equation}
+Then,
+\begin{equation}
+  1 \text{eV} = 1.602 \times 10^{-19} \text{J, Joule}
+\end{equation}
+
+\subsection{Part B}
+\begin{equation}
+  \mu = \frac{m_em_p}{m_e + m_p} = \frac{9.10938 \times 10^{-31} \cdot 1.67262 \times 10^{-27}}{9.10938 \times 10^{-31} + 1.67262 \times 10^{-27}} = 9.103 \times 10^{-31}
+\end{equation}
+
+Since the energy levels are quantized, the energy levels are given by
+
+\begin{equation}
+  E_n = -\frac{m_e e^4}{8(h \epsilon_0)^2} \frac{1}{n^2} = - R^{*}_y \frac{Z^2}{n^2}
+\end{equation}
+
+Where $R^{*}_y = \frac{m_e e^4}{8(h \epsilon_0)^2}$ is the Rydberg constant for hydrogen-like atoms which is $13.6$ eV.
+
+For Hydrogen atom, the $Z$ is $1$, since it has only one proton. Then, the energy levels are given by
+
+\begin{equation}
+  \begin{cases}
+    \displaystyle
+    E_1 = -13.6 \frac{1}{1^{2}} = -13.6 \text{eV} \\
+    \\
+    \displaystyle
+    E_2 = -13.6 \frac{1}{2^{2}} = -3.4 \text{eV} \\
+    \\
+    \displaystyle
+    E_3 = -13.6 \frac{1}{3^{2}} = -1.51 \text{eV} \\
+  \end{cases}
+\end{equation}
+
+To calculate the electric current and the magnetic dipole moment, we can use the following equations
+
+\begin{equation}
+  \begin{cases}
+  \displaystyle
+  \mu_{l} = I \cdot \vec{A} = I \cdot \pi r^2 \cdot \vec{n} \\
+  \\
+  \displaystyle
+  \mu_{l} = -\frac{u_B}{\hbar} \cdot \vec{L}
+  \end{cases}
+\end{equation}
+
+Then we can rearrange the equation to get
+
+\begin{equation}
+  I = - \frac{u_B}{\pi r^{2}} \abs{\vec{L}}
+\end{equation}
+
+The magnitude of the angular momentum is given by
+
+\begin{equation}
+  \abs{\vec{L}} = \sqrt{l(l+1)} \hbar
+\end{equation}
+
+The maximum value of the magnetic dipole moment is given by the maximum value of $l$ which can determine
+by the quantum number $n$. Then, the maximum value of $l$ is $n-1$. 
+
+Since we know that $r_n$ is given by
+
+\begin{equation}
+  r_n = \frac{4\pi \epsilon_{o} \hbar^2}{m_e e^2} n^{2}
+\end{equation}
+
+\begin{equation}
+  \begin{cases}
+    r_1 = 5.29 \times 10^{-11} \text{m} \\
+    r_2 = 4 \times 5.29 \times 10^{-11} \text{m} = 2.12 \times 10^{-10} \text{m} \\
+    r_3 = 9 \times 5.29 \times 10^{-11} \text{m} = 4.76 \times 10^{-10} \text{m} \\
+  \end{cases}
+\end{equation}
+
+Then we can find
+
+\begin{equation}
+  \begin{cases}
+    \displaystyle
+    \mu_{n = 1, l = 0} = 0 \implies I_{n =1, l = 0} = 0 \\
+    \\
+    \displaystyle
+    \mu_{n = 2, l = 1} = \sqrt{2} \mu_B \implies I_{n = 2, l = 1} = \frac{\sqrt{2}\mu_B}{2 \pi r_{2}^{2}} \\
+    \\
+    \displaystyle
+    \mu_{n = 3, l = 2} = \sqrt{6} \mu_B \implies I_{n = 3, l = 2} = \frac{\sqrt{6}\mu_B}{2 \pi r_{3}^{2}} \\
+  \end{cases}
+\end{equation}
+
+\subsection{Part C}
+
+The magnetic moment of electron is given by
+
+\begin{equation}
+  \mu_e = - 9.284 \times 10^{-24} \text{J/T}
+\end{equation}
+
+Since $\mu_e = \frac{e}{2 m_e}L = - \frac{erv}{2}$, we can solve for $v$ to get by assuming $r = 10^{-18}$m
+
+\begin{align}
+  v &= - \frac{2 \mu_e}{er} \\
+  &= - \frac{2 \cdot -9.284 \times 10^{-24}}{1.6 \times 10^{-19} \cdot 10^{-18}} \\
+  &=  1.159 \times 10^{14} \text{m/s} \\
+\end{align}
+
+This is a very high speed, which is exceeded to the speed of light. This is not possible since the speed of light is the maximum speed in the universe.
+\end{document}
